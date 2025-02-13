@@ -6,7 +6,7 @@
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
         <div class="mobile-window">
-            <!-- <TheLoader v-if="isLoading" /> --> 
+            <!-- <TheLoader v-if="isLoading" /> -->
             <div class="page">
                 <div class="gosha">
                     <!-- <TheLoader v-if="isLoading" /> -->
@@ -350,7 +350,7 @@ export default {
             flex-direction: column;
             gap: 3px;
             position: absolute;
-            top: 15px;
+            top: 18px;
             left: 25px;
             right: 15px;
 
@@ -367,6 +367,7 @@ export default {
                 font-weight: 400;
                 font-size: 16px;
                 color: #073049;
+                line-height: 105%;
 
                 @media (max-width: 1920px) {
                     font-size: 20px;

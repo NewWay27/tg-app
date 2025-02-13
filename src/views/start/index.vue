@@ -1,13 +1,13 @@
 <template>
 
     <div class="desktop-background">
-        <!-- <TheLoader v-if="isLoading" /> -->
         <img src="@/assets/logo_desktop.png" alt="logo" class="logo-desktop">
         <div class="tg-desktop">
             <span>Телеграм-канал</span>
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
-        <div class="mobile-window">
+        <TheLoader v-if="isLoading" />
+        <div class="mobile-window" v-else>
             <div class="greetings">
                 <!-- <TheLoader v-if="isLoading" /> -->
                 <img src="@/assets/back.png" alt="back" class="greetings__background">

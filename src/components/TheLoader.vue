@@ -11,6 +11,7 @@
 .loader {
     background: #0a3956;
     height: 100vh;
+    width: 539px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,8 +22,13 @@
         border-radius: 29px 29px 0 0;
     }
 
+    @media (max-width: 1440px) {
+        width: 390px;
+    }
+
     @media (max-width: 480px) {
         height: 100vh;
+        width: 100%;
         border-radius: 0;
     }
 

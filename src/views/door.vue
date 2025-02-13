@@ -5,8 +5,9 @@
             <span>Телеграм-канал</span>
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
-        <div class="mobile-window">
-            <!-- <TheLoader v-if="isLoading" /> -->
+        <TheLoader v-if="isLoading" />
+        <div class="mobile-window" v-else>
+
             <div class="page">
                 <img src="@/assets/door_back.png" alt="background" class="background" v-show="showBackground">
                 <div class="door" ref="door">
