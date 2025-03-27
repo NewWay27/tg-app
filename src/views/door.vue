@@ -118,7 +118,9 @@ export default {
     },
     methods: {
         goToPreFinal() {
-            this.$router.push('/pre-final');
+            // this.$router.push('/pre-final');
+            this.$router.push('/finals');
+
         },
         preloadImages(imagePaths) {
             return Promise.all(imagePaths.map(src => {
