@@ -209,7 +209,7 @@ export default {
         content: "";
         position: fixed;
         top: 90px;
-        left: 690px;
+        // left: 690px;
         width: 539px;
         height: 90vh;
         background-color: rgba(0, 0, 0, 0.9);

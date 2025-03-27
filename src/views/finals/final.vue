@@ -90,24 +90,37 @@ export default {
         },
         async fetchCsrfToken() {
             try {
-                const response = await fetch('https://api.ozontechhrbot.ru/sanctum/csrf-cookie', {
+                const response = await fetch('https://korobchik.ozon.tech/api/sanctum/csrf-cookie', {
                     method: 'GET',
                     credentials: 'include', // Включает отправку и получение cookies
                     headers: {
-                        'Accept': 'application/json', // Указываем, что ожидаем JSON-ответ
+                        'Accept': 'application/json',
                     },
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Ошибка получения CSRF-cookie: ${response.status} ${response.statusText}`);
-                }
+                // if (!response.ok) {
+                //     throw new Error(`Ошибка получения CSRF-токена: ${response.status} ${response.statusText}`);
+                // }
 
-                console.log('CSRF-cookie успешно установлены.');
-                // Если куки успешно установлены, они будут доступны для последующих запросов.
+                // const data = await response.json(); // Парсим JSON-ответ
+
+                // if (!data.csrfToken) {
+                //     throw new Error("CSRF-токен отсутствует в ответе.");
+                // }
+
+                // console.log('CSRF Token:', data.csrfToken);
+
+                // Устанавливаем CSRF-токен в куки браузера (на 2 часа)
+                // document.cookie = `XSRF-TOKEN=${data.csrfToken}; path=/; max-age=7200; secure; SameSite=Lax`;
+                // document.cookie = `X-Session-ID=${data.sessionId}; path=/; max-age=7200; secure; SameSite=Lax`;
+                console.log("CSRF-токен успешно сохранен в куки.");
+                // return data.csrfToken; // Можно вернуть токен, если он нужен в коде
+
             } catch (error) {
-                console.error('Ошибка при запросе CSRF-cookie:', error.message);
+                console.error('Ошибка при запросе CSRF-токена:', error.message);
             }
         },
+
         async openVacancies() {
             // window.location.href = 'https://ozon.tech/gamebot-job';
 
@@ -116,7 +129,7 @@ export default {
                 await this.fetchCsrfToken(); // Дожидаемся завершения получения CSRF-токена
                 const csrfToken = this.getCookie('XSRF-TOKEN');
                 const user_id = this.getCookie('user_id');
-
+                const sessionId = this.getCookie('X-Session-ID');
                 // Проверяем наличие CSRF-токена и UUID
                 if (!csrfToken) {
                     console.error('CSRF-токен не найден в куках.');
@@ -137,6 +150,7 @@ export default {
                 const headers = {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
+                    'X-Session-ID': sessionId,
                     "X-XSRF-TOKEN": csrfToken,
                     "Sec-Fetch-Dest": "empty",
                     "Sec-Fetch-Mode": "cors",
@@ -175,6 +189,7 @@ export default {
             document.body.style.overflow = '';
         },
         openChat() {
+
             this.$router.push('/chat/obx');
             document.body.style.overflow = '';
         },

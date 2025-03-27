@@ -268,6 +268,12 @@ export default {
     background-repeat: no-repeat;
     overflow-y: auto;
 
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
+
     @media (max-width: 1920px) {
         height: 90vh;
     }
@@ -283,6 +289,11 @@ export default {
     height: 80vh;
     overflow: auto;
     // margin: 0 0 20px 0;
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 
     @media (max-width: 1920px) {
         padding: 20px 7px 0;
@@ -419,10 +430,14 @@ export default {
         color: #fff;
         border: none;
         padding: 11px 124px;
-        width: 100%;
         margin: 65px 0 0 0;
         white-space: nowrap;
         cursor: pointer;
+
+        position: absolute;
+        bottom: 50px;
+        left: 7px;
+        width: calc(100% - 14px);
 
         @media (max-width: 430px) {
             margin: 65px 0 0 0;

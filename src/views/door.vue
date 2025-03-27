@@ -19,7 +19,9 @@
                         <img src="@/assets/fignya1.png" alt="text" class="door__dialog-bubble">
                         <span>О, мы как раз вовремя!</span>
                     </div>
-                    <img src="@/assets/flag.png" alt="flag" v-show="showFlag" class="flag">
+                    <Transition name="fade">
+                        <img src="@/assets/flag.png" alt="flag" v-show="showFlag" class="flag">
+                    </Transition>
                     <img src="@/assets/all_new.png" alt="together" v-show="showFinalCharacters"
                         class="final-characters">
                     <div class="lizard__dialog" v-show="showMsg2">
@@ -67,44 +69,82 @@ export default {
             this.showDoor = true;
             this.showBackground = true;
         }, 0);
+        this.preloadImages([
+            new URL('@/assets/logo_desktop.png', import.meta.url).href,
+            new URL('@/assets/tg-d.svg', import.meta.url).href,
+            new URL('@/assets/door_back.png', import.meta.url).href,
+            new URL('@/assets/door.png', import.meta.url).href,
+            new URL('@/assets/open_eyes.png', import.meta.url).href,
+            new URL('@/assets/Corobchik.png', import.meta.url).href,
+            new URL('@/assets/fignya1.png', import.meta.url).href,
+            new URL('@/assets/flag.png', import.meta.url).href,
+            new URL('@/assets/all_new.png', import.meta.url).href,
+            new URL('@/assets/place.png', import.meta.url).href
+        ]).then(() => {
+            this.isLoading = false; // Убираем лоадер после загрузки всех изображений
+            // this.startAnimation(); // Запускаем анимации
+        }).catch(err => {
+            console.error("Ошибка загрузки изображений:", err);
+            this.isLoading = false; // В любом случае скрываем лоадер
+        });
 
         setTimeout(() => {
             this.showCharacters = true;
-            this.isLoading = false;
-        }, 2000);
+            // this.isLoading = false;
+        }, 1000);
 
         setTimeout(() => {
             this.showMsg = true;
-        }, 5000);
+        }, 3000);
 
         setTimeout(() => {
             this.showMsg = false;
             this.showCharacters = false;
             this.showDoor = false;
             this.showFlag = true;
-        }, 7000);
+        }, 4000);
         setTimeout(() => {
             this.showFinalCharacters = true;
-        }, 11000);
+        }, 5000);
         setTimeout(() => {
             this.showMsg2 = true;
-        }, 12000);
+        }, 6000);
         setTimeout(() => {
             this.showPoints = true;
-        }, 13000);
+        }, 7000);
         setTimeout(() => {
             this.showBtn = true;
-        }, 14000);
+        }, 8000);
     },
     methods: {
         goToPreFinal() {
             this.$router.push('/pre-final');
         },
+        preloadImages(imagePaths) {
+            return Promise.all(imagePaths.map(src => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            }));
+        }
     }
 }
 </script>
 
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
 .desktop-background {
     background: url('@/assets/bgg.svg') no-repeat center center;
     background-size: cover;

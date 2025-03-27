@@ -391,7 +391,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: auto;
+        height: 100dvh;
     }
 }
 
@@ -400,6 +400,11 @@ export default {
     margin: 0 0 20px 0;
     height: 80vh;
     overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 
     @media (max-width: 1920px) {
         padding: 20px 7px 0;

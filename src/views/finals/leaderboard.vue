@@ -1,4 +1,5 @@
 <template>
+
     <div class="desktop-background">
         <img src="@/assets/logo_desktop.png" alt="logo" class="logo-desktop">
         <div class="tg-desktop">
@@ -148,7 +149,6 @@ export default {
     mounted() {
         this.getLeaders();
         this.getMyPoints();
-        document.body.style.overflow = 'auto';
         this.checkVisibility();
         window.addEventListener('scroll', this.checkVisibility);
     },
@@ -178,9 +178,9 @@ export default {
                 console.error("Куки с именем 'uuid' не найдены.");
                 return;
             }
-            console.log(params)
+            console.log(params, ' UUID')
 
-            let url = 'https://api.ozontechhrbot.ru/api/leaderboard';
+            let url = 'https://ozontechhrbot.ru/api/leaderboard';
 
             axios
                 .get(url, {
@@ -194,6 +194,7 @@ export default {
                 })
                 .then(res => {
                     console.log(res.data);
+                    console.log('alo')
                     this.leaders = res.data.data;
                     this.first_leader = res.data.data[0].username;
                     this.second_leader = res.data.data[1].username;
@@ -215,7 +216,7 @@ export default {
                 return;
             }
 
-            let url = 'https://api.ozontechhrbot.ru/api/leaderboard/me';
+            let url = 'https://ozontechhrbot.ru/api/leaderboard/me';
 
             axios
                 .get(url, {
@@ -304,7 +305,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -379,16 +380,17 @@ export default {
     background-color: #02283E;
     background-image: url(@/assets/Vector.png);
     background-size: cover;
+    display: flex;
+    flex-direction: column;
 
-    // height: 100vh;
-    // overflow-y: auto;
+    height: 100dvh;
 
     @media (max-width: 1920px) {
-        height: 90vh;
+        height: 90dvh;
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 }
 
@@ -535,6 +537,13 @@ export default {
     flex-direction: column;
     gap: 10px;
     margin: 23px 20px;
+    overflow-y: auto;
+
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 
     &__item {
         display: flex;

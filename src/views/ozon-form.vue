@@ -79,24 +79,37 @@ export default {
     },
     async fetchCsrfToken() {
       try {
-        const response = await fetch('https://api.ozontechhrbot.ru/sanctum/csrf-cookie', {
+        const response = await fetch('https://korobchik.ozon.tech/api/sanctum/csrf-cookie', {
           method: 'GET',
           credentials: 'include', // Включает отправку и получение cookies
           headers: {
-            'Accept': 'application/json', // Указываем, что ожидаем JSON-ответ
+            'Accept': 'application/json',
           },
         });
 
-        if (!response.ok) {
-          throw new Error(`Ошибка получения CSRF-cookie: ${response.status} ${response.statusText}`);
-        }
+        // if (!response.ok) {
+        //     throw new Error(`Ошибка получения CSRF-токена: ${response.status} ${response.statusText}`);
+        // }
 
-        console.log('CSRF-cookie успешно установлены.');
-        // Если куки успешно установлены, они будут доступны для последующих запросов.
+        // const data = await response.json(); // Парсим JSON-ответ
+
+        // if (!data.csrfToken) {
+        //     throw new Error("CSRF-токен отсутствует в ответе.");
+        // }
+
+        // console.log('CSRF Token:', data.csrfToken);
+
+        // Устанавливаем CSRF-токен в куки браузера (на 2 часа)
+        // document.cookie = `XSRF-TOKEN=${data.csrfToken}; path=/; max-age=7200; secure; SameSite=Lax`;
+        // document.cookie = `X-Session-ID=${data.sessionId}; path=/; max-age=7200; secure; SameSite=Lax`;
+        console.log("CSRF-токен успешно сохранен в куки.");
+        // return data.csrfToken; // Можно вернуть токен, если он нужен в коде
+
       } catch (error) {
-        console.error('Ошибка при запросе CSRF-cookie:', error.message);
+        console.error('Ошибка при запросе CSRF-токена:', error.message);
       }
     },
+
     getCookie(name) {
       const matches = document.cookie.match(new RegExp(
         `(?:^|; )${name.replace(/([$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`
@@ -107,7 +120,7 @@ export default {
       try {
         // Дожидаемся установки CSRF-токена
         await this.fetchCsrfToken();
-
+        const sessionId = this.getCookie('X-Session-ID');
         const csrfToken = this.getCookie('XSRF-TOKEN');
         const uuid = this.getCookie('uuid');
 
@@ -124,12 +137,13 @@ export default {
 
         console.log('UUID:', uuid);
 
-        const url = new URL('https://api.ozontechhrbot.ru/api/form/create'); // Создаем URL-объект
+        const url = new URL('https://ozontechhrbot.ru/api/form/create'); // Создаем URL-объект
 
         // Формируем заголовки
         const headers = {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'X-Session-ID': sessionId,
           "X-XSRF-TOKEN": csrfToken,
           "Sec-Fetch-Dest": "empty",
           "Sec-Fetch-Mode": "cors",
@@ -158,7 +172,6 @@ export default {
   }
 };
 </script>
-
 <style lang="scss" scoped>
 .desktop-background {
   background: url('@/assets/bgg.svg') no-repeat center center;
@@ -218,11 +231,14 @@ export default {
 
 .mobile-window {
   width: 539px;
-  // height: 90vh;
   position: relative;
-  overflow: hidden;
   border-radius: 29px 29px 0 0;
   box-shadow: 0 0 14px 0 #032b44;
+
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
 
   @media (max-width: 1440px) {
     width: 390px;
@@ -242,7 +258,11 @@ export default {
   align-items: center;
   text-align: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
 
   &__logo {
     text-align: center;
@@ -260,16 +280,17 @@ export default {
   justify-content: flex-start;
   position: relative;
   background-color: #fff;
- // height: 100vh;
+  height: 100vh;
 
   iframe {
     border: none;
     width: 100%;
-    height: 80vh;
-    z-index: 0;
+    height: 100vh;
+    background: #f9fafb;
+    padding: 40px 0 0px;
 
     @media (max-width: 480px) {
-      height: 90vh;
+      height: 100vh;
     }
   }
 

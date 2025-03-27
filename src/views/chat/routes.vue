@@ -351,6 +351,12 @@ export default {
     background-repeat: no-repeat;
     overflow-y: auto;
 
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
+
     @media (max-width: 1920px) {
         height: 90vh;
     }

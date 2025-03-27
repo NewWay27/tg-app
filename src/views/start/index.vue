@@ -164,22 +164,34 @@ export default {
         },
         async fetchCsrfToken() {
             try {
-                const response = await fetch('https://api.ozontechhrbot.ru/sanctum/csrf-cookie', {
+                const response = await fetch('https://korobchik.ozon.tech/api/sanctum/csrf-cookie', {
                     method: 'GET',
                     credentials: 'include', // Включает отправку и получение cookies
                     headers: {
-                        'Accept': 'application/json', // Указываем, что ожидаем JSON-ответ
+                        'Accept': 'application/json',
                     },
                 });
 
-                if (!response.ok) {
-                    throw new Error(`Ошибка получения CSRF-cookie: ${response.status} ${response.statusText}`);
-                }
+                // if (!response.ok) {
+                //     throw new Error(`Ошибка получения CSRF-токена: ${response.status} ${response.statusText}`);
+                // }
 
-                console.log('CSRF-cookie успешно установлены.');
-                // Если куки успешно установлены, они будут доступны для последующих запросов.
+                // const data = await response.json(); // Парсим JSON-ответ
+
+                // if (!data.csrfToken) {
+                //     throw new Error("CSRF-токен отсутствует в ответе.");
+                // }
+
+                // console.log('CSRF Token:', data.csrfToken);
+
+                // Устанавливаем CSRF-токен в куки браузера (на 2 часа)
+                // document.cookie = `XSRF-TOKEN=${data.csrfToken}; path=/; max-age=7200; secure; SameSite=Lax`;
+                // document.cookie = `X-Session-ID=${data.sessionId}; path=/; max-age=7200; secure; SameSite=Lax`;
+                console.log("CSRF-токен успешно сохранен в куки.");
+                // return data.csrfToken; // Можно вернуть токен, если он нужен в коде
+
             } catch (error) {
-                console.error('Ошибка при запросе CSRF-cookie:', error.message);
+                console.error('Ошибка при запросе CSRF-токена:', error.message);
             }
         },
         getCookie(name) {
@@ -196,7 +208,7 @@ export default {
                 return;
             }
 
-            let url = 'https://api.ozontechhrbot.ru/api/form/get';
+            let url = 'https://ozontechhrbot.ru/api/form/get';
 
             axios
                 .get(url, {
@@ -217,9 +229,21 @@ export default {
                 .catch(error => {
                     console.error(error);
                 })
+        },
+        preloadImages(imagePaths) {
+            return Promise.all(imagePaths.map(src => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            }));
         }
     },
     mounted() {
+        const images = import.meta.glob('@/assets/*.{png,svg}', { eager: true });
+        const imageUrls = Object.values(images).map(img => img.default);
         this.expandTelegramWebApp();
         const webApp = window.Telegram?.WebApp;
         const urlParams = new URLSearchParams(window.location.search);
@@ -245,10 +269,37 @@ export default {
             console.error('Telegram WebApp API не доступен.');
         }
         this.fetchCsrfToken();
-        this.getFormResult();
-        setTimeout(() => {
-            this.isLoading = false;
-        }, 2000);
+
+
+        const formResultPromise = this.getFormResult();
+
+
+        const imagesPromise = this.preloadImages([
+            new URL('@/assets/logo_desktop.png', import.meta.url).href,
+            new URL('@/assets/tg-d.svg', import.meta.url).href,
+            new URL('@/assets/back.png', import.meta.url).href,
+            new URL('@/assets/hello.png', import.meta.url).href,
+            new URL('@/assets/open_eyes.png', import.meta.url).href,
+            new URL('@/assets/dialog.png', import.meta.url).href,
+            new URL('@/assets/dialog2.png', import.meta.url).href,
+            new URL('@/assets/smirk_new.png', import.meta.url).href,
+            new URL('@/assets/Corobchik_neww.png', import.meta.url).href,
+            new URL('@/assets/сorobchik-hand_new.png', import.meta.url).href,
+            new URL('@/assets/text2.svg', import.meta.url).href,
+            new URL('@/assets/final-bubble.png', import.meta.url).href
+        ]);
+
+
+        Promise.all([formResultPromise, imagesPromise])
+            .then(() => {
+                setTimeout(() => {
+                    this.isLoading = false;
+                }, 500);
+            })
+            .catch(err => {
+                console.error("Ошибка при загрузке данных или изображений:", err);
+                this.isLoading = false;
+            });
     }
 }
 </script>
@@ -317,7 +368,7 @@ export default {
     border-radius: 29px 29px 0 0;
     box-shadow: 0 0 14px 0 #032b44;
 
-    @media (max-width: 1440px) {
+    @media (max-width: 1024px) {
         width: 390px;
     }
 
@@ -333,7 +384,7 @@ export default {
     height: 90vh;
 
     @media (max-width: 480px) {
-        height: auto;
+        height: 100vh;
     }
 
     &__background {
@@ -343,6 +394,7 @@ export default {
         @media (max-width: 480px) {
             height: 100vh;
         }
+
     }
 
     &__gosha_begin {
@@ -359,7 +411,7 @@ export default {
             left: 48%;
             top: 15%;
             right: 0;
-            transform: translateX(-50%) scale(0.9);
+            transform: translateX(-50%) scale(1);
         }
 
         @media (max-width: 1440px) {
@@ -536,7 +588,7 @@ export default {
             }
 
             @media (max-width: 430px) {
-                top: 20px;
+                top: 30px;
                 left: 35px;
                 right: 35px;
             }
@@ -545,13 +597,9 @@ export default {
                 top: 25px;
             }
 
-            @media (max-width: 390px) {
-                top: 20px;
-            }
-
             @media (max-width: 375px) {
                 // top: calc(35% - 180px);
-                top: 30px;
+                top: 20px;
                 left: 30px;
                 right: 20px;
             }
@@ -1110,7 +1158,7 @@ export default {
             left: 37%;
         }
 
-        @media (max-width: 1440px) {
+        @media (max-width: 1024px) {
             top: 15%;
             left: 35%;
         }
