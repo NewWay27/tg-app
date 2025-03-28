@@ -330,6 +330,8 @@ export default {
                     setTimeout(() => {
                         this.showChatBlueFinal[index] = true;
                         if (el) {
+                            el.style.willChange = 'transform, opacity';
+                            el.style.transform = 'translateZ(0)';
                             el.style.opacity = '1';
                             el.classList.add('avatar-padding-4');
                             el.style.transition = 'transform 0.5s ease, opacity 0.5s ease';

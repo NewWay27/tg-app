@@ -288,7 +288,7 @@ export default {
 .chat {
     padding: 80px 7px 50px;
     margin: 0 0 10px 0;
-    height: 70dvh;
+    height: 60vh;
     overflow: auto;
     // margin: 0 0 20px 0;
 

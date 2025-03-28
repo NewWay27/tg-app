@@ -344,7 +344,7 @@ export default {
 
 .page {
     background-color: #02283E;
-    height: 100dvh;
+    height: 100vh;
     background-image: url(@/assets/Vector.png);
     background-position: center;
     background-size: cover;
@@ -362,12 +362,19 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100dvh;
+        height: 100vh;
     }
 }
 
 .chat {
     padding: 90px 7px 0;
+    height: 82vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 
     @media (max-width: 1920px) {
         padding: 20px 7px 0;

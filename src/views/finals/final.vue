@@ -374,6 +374,7 @@ export default {
     @media (max-width: 600px) {
         left: 130px;
         width: 254px;
+        bottom: 40px;
     }
 
     @media (max-width: 430px) {
@@ -404,6 +405,10 @@ export default {
     bottom: 60px;
     left: 17px;
     right: 17px;
+
+    @media (max-width: 500px) {
+        bottom: 40px;
+    }
 
     span {
         font-family: var(--gte);
