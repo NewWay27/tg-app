@@ -31,7 +31,7 @@
 
                     <div class="points" v-show="showPoints">
                         <p>Набранные баллы:</p>
-                        <span>1142</span>
+                        <span>{{ points }}</span>
                     </div>
 
                     <div v-show="showBtn">
@@ -45,6 +45,7 @@
 
 <script>
 import TheLoader from '@/components/TheLoader.vue';
+import axios from 'axios';
 
 export default {
     components: {
@@ -62,9 +63,11 @@ export default {
             showPoints: false,
             showBtn: false,
             showBackground: false,
+            points: 0,
         }
     },
     mounted() {
+        this.get_scores()
         setTimeout(() => {
             this.showDoor = true;
             this.showBackground = true;
@@ -121,6 +124,34 @@ export default {
             // this.$router.push('/pre-final');
             this.$router.push('/finals');
 
+        },
+        getCookie(name) {
+            const matches = document.cookie.match(new RegExp(
+                `(?:^|; )${name.replace(/([$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`
+            ));
+            return matches ? decodeURIComponent(matches[1]) : null;
+        },
+        get_scores() {
+            const uuid = this.getCookie("uuid");
+            let url = 'https://korobchik.ozon.tech/api/current-points';
+
+            axios
+                .get(url, {
+                    params: {
+                        "code": uuid,
+                    },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                })
+                .then(res => {
+                    console.log(res.data)
+                    this.points = res.data.points
+                })
+                .catch(error => {
+                    console.error(error);
+                })
         },
         preloadImages(imagePaths) {
             return Promise.all(imagePaths.map(src => {

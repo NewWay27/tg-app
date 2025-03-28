@@ -258,7 +258,8 @@ export default {
   align-items: center;
   text-align: center;
   justify-content: center;
-  position: fixed;
+  // position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 5;

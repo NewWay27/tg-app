@@ -137,6 +137,9 @@ export default {
                 const csrfToken = this.getCookie('XSRF-TOKEN');
                 const user_id = this.getCookie('user_id');
                 const sessionId = this.getCookie('X-Session-ID');
+                const utm_source = localStorage.getItem('utm_source')
+                const utm_medium = localStorage.getItem('utm_medium')
+                const utm_campaign = localStorage.getItem('utm_campaign')
                 // Проверяем наличие CSRF-токена и UUID
                 if (!csrfToken) {
                     console.error('CSRF-токен не найден в куках.');
@@ -152,9 +155,9 @@ export default {
                 // url.searchParams.append('utm_source', 'tg');
                 // url.searchParams.append('utm_medium', 'gamebot');
                 // url.searchParams.append('utm_campaign', user_id);
-                url.searchParams.append('utm_source', 'conference');
-                url.searchParams.append('utm_medium', 'qr');
-                url.searchParams.append('utm_campaign', '050425');
+                url.searchParams.append('utm_source', utm_source);
+                url.searchParams.append('utm_medium', utm_medium);
+                url.searchParams.append('utm_campaign', utm_campaign);
 
                 // Устанавливаем заголовки
                 const headers = {

@@ -230,6 +230,23 @@ export default {
                     console.error(error);
                 })
         },
+        get_uuid() {
+            let url = 'https://korobchik.ozon.tech/api/register-web-user';
+
+            axios
+                .post(url, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                })
+                .then(res => {
+                    this.setCookie('uuid', res.data.uuid, 7);
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+        },
         preloadImages(imagePaths) {
             return Promise.all(imagePaths.map(src => {
                 return new Promise((resolve, reject) => {
@@ -239,22 +256,43 @@ export default {
                     img.onerror = reject;
                 });
             }));
+        },
+        saveUtmToLocalStorage() {
+            const params = new URLSearchParams(window.location.search);
+
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+                const value = params.get(key);
+                if (value) {
+                    localStorage.setItem(key, value);
+                }
+            });
         }
+
     },
     mounted() {
+        this.saveUtmToLocalStorage();
+        const cookie_id = this.getCookie('uuid')
+
+        if (!cookie_id) {
+            this.get_uuid()
+        }
+        else {
+            console.log('UUID: ', cookie_id)
+        }
+
         const images = import.meta.glob('@/assets/*.{png,svg}', { eager: true });
         const imageUrls = Object.values(images).map(img => img.default);
         this.expandTelegramWebApp();
         const webApp = window.Telegram?.WebApp;
-        const urlParams = new URLSearchParams(window.location.search);
-        const uuid = urlParams.get('query');
-        // console.log(getCookie('uuid'));
-        if (uuid) {
-            console.log('Полученный UUID:', uuid);
-            this.setCookie('uuid', uuid, 7); // Сохраняем UUID на 7 дней
-        } else {
-            console.error('UUID отсутствует в параметре query.');
-        }
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const uuid = urlParams.get('query');
+        // // console.log(getCookie('uuid'));
+        // if (uuid) {
+        //     console.log('Полученный UUID:', uuid);
+        //     this.setCookie('uuid', uuid, 7); // Сохраняем UUID на 7 дней
+        // } else {
+        //     console.error('UUID отсутствует в параметре query.');
+        // }
         if (webApp) {
             // Проверяем, доступен ли user
             const user = webApp.initDataUnsafe?.user;
