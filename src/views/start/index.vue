@@ -34,7 +34,7 @@
                     <div class="greetings__about-korobchik-text">
                         <span>А это Коробчик — подарок на день рождения и один из 4 000 000+ ежедневных заказов на
                             Ozon.</span>
-                        <span>Над оперативностью доставки работают 6 600+ ИТ-специалистов в сложной системе с <br> 7 000
+                        <span>Над оперативностью доставки работают 6 500+ ИТ-специалистов в сложной системе с <br> 7 000
                             микросервисами.</span>
                     </div>
                 </div>
@@ -293,19 +293,19 @@ export default {
         // } else {
         //     console.error('UUID отсутствует в параметре query.');
         // }
-        if (webApp) {
-            // Проверяем, доступен ли user
-            const user = webApp.initDataUnsafe?.user;
+        // if (webApp) {
+        //     // Проверяем, доступен ли user
+        //     const user = webApp.initDataUnsafe?.user;
 
-            if (user && user.id) {
-                console.log('User ID:', user.id); // Логируем user_id
-                this.setCookie('user_id', user.id, 7);
-            } else {
-                console.error('User ID недоступен.');
-            }
-        } else {
-            console.error('Telegram WebApp API не доступен.');
-        }
+        //     if (user && user.id) {
+        //         console.log('User ID:', user.id); // Логируем user_id
+        //         this.setCookie('user_id', user.id, 7);
+        //     } else {
+        //         console.error('User ID недоступен.');
+        //     }
+        // } else {
+        //     console.error('Telegram WebApp API не доступен.');
+        // }
         this.fetchCsrfToken();
 
 
