@@ -142,9 +142,12 @@ export default {
 
                 // Формируем URL для запроса
                 const url = new URL(`https://ozon.tech/gamebot-job`);
-                url.searchParams.append('utm_source', 'tg');
-                url.searchParams.append('utm_medium', 'gamebot');
-                url.searchParams.append('utm_campaign', user_id);
+                // url.searchParams.append('utm_source', 'tg');
+                // url.searchParams.append('utm_medium', 'gamebot');
+                // url.searchParams.append('utm_campaign', user_id);
+                url.searchParams.append('utm_source', 'conference');
+                url.searchParams.append('utm_medium', 'qr');
+                url.searchParams.append('utm_campaign', '050425');
 
                 // Устанавливаем заголовки
                 const headers = {
@@ -185,7 +188,8 @@ export default {
             document.body.style.overflow = 'hidden';
         },
         openLeaderboard() {
-            this.$router.push('/finals/leaderboard');
+            // this.$router.push('/finals/leaderboard');
+            this.$router.push('/door');
             document.body.style.overflow = '';
         },
         openChat() {

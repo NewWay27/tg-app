@@ -32,9 +32,9 @@
                 <div class="greetings__about-korobchik" v-if="corobchikVisible">
                     <img src="@/assets/dialog2.png" alt="dialog" class="greetings__about-korobchik-bubble">
                     <div class="greetings__about-korobchik-text">
-                        <span>А это Коробчик — подарок на день рождения и один из 6 100 000 ежедневных заказов на
+                        <span>А это Коробчик — подарок на день рождения и один из 4 000 000+ ежедневных заказов на
                             Ozon.</span>
-                        <span>Над оперативностью доставки работают 6 000+ ИТ-специалистов в сложной системе с <br> 6 100
+                        <span>Над оперативностью доставки работают 6 600+ ИТ-специалистов в сложной системе с <br> 7 000
                             микросервисами.</span>
                     </div>
                 </div>
