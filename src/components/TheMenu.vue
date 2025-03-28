@@ -1,15 +1,15 @@
 <template>
     <div class="popup" @click.self="closeMenu" @touchstart="startSwipe" @touchend="endSwipe">
         <div class="popup__block">
-        <div class="popup__header">
-            <slot name="title"></slot>
-            <img src="@/assets/handle.svg" alt="handle">
-        </div>
-        <div class="popup__body">
-            <slot name="body"></slot>
+            <div class="popup__header">
+                <slot name="title"></slot>
+                <img src="@/assets/handle.svg" alt="handle">
+            </div>
+            <div class="popup__body">
+                <slot name="body"></slot>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .popup {
-    height: 100vh;
+    height: 100dvh;
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
     position: fixed;
@@ -59,7 +59,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
         width: 100%;
         padding: 20px 0 0;
         border-radius: 0;
@@ -83,9 +83,11 @@ export default {
     0% {
         transform: translateY(100%);
     }
+
     80% {
         transform: translateY(-10px);
     }
+
     100% {
         transform: translateY(0);
     }

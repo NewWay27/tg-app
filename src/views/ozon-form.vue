@@ -179,7 +179,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: end;
-  height: 100vh;
+  height: 100dvh;
 
   @media (max-width: 480px) {
     background: none;
@@ -281,17 +281,17 @@ export default {
   justify-content: flex-start;
   position: relative;
   background-color: #fff;
-  height: 100vh;
+  height: 100dvh;
 
   iframe {
     border: none;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     background: #f9fafb;
     padding: 40px 0 0px;
 
     @media (max-width: 480px) {
-      height: 100vh;
+      height: 100dvh;
     }
   }
 

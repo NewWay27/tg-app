@@ -272,7 +272,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -344,12 +344,12 @@ export default {
 
 .page {
     background-color: #02283E;
-    height: 100vh;
+    height: 100dvh;
     background-image: url(@/assets/Vector.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow-y: auto;
+    // overflow-y: auto;
 
 
     &::-webkit-scrollbar {
@@ -362,7 +362,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 }
 
@@ -628,7 +628,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;

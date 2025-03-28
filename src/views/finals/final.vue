@@ -221,7 +221,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -293,7 +293,7 @@ export default {
 .page {
     overflow: hidden;
     position: relative;
-    height: 100vh;
+    height: 100dvh;
     background-color: #02283E;
     background-image: url(@/assets/Vector.png);
     background-size: cover;
@@ -304,7 +304,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 }
 

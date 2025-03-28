@@ -184,7 +184,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -277,7 +277,7 @@ export default {
 
 .door {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     // background: url(@/assets/door_back.png) no-repeat center fixed;
     background-size: cover;
     background-position: center;
@@ -288,7 +288,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 
     &-back {

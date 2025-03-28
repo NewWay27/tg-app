@@ -137,7 +137,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -224,7 +224,7 @@ export default {
 
         @media (max-width: 480px) {
             width: 100%;
-            height: 100vh;
+            height: 100dvh;
             top: 0;
             left: 0;
             border-radius: 0;
@@ -235,7 +235,7 @@ export default {
 .page {
     overflow: hidden;
     position: relative;
-    height: 100vh;
+    height: 100dvh;
     background-color: #02283E;
     background-image: url(@/assets/Vector.png);
     background-size: cover;
@@ -246,7 +246,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 
     &::before {
@@ -479,7 +479,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;

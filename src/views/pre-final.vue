@@ -173,7 +173,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -251,7 +251,7 @@ export default {
     background: url(@/assets/fon.png) no-repeat center fixed;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 1920px) {
         height: 90vh;
@@ -259,7 +259,7 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
         background-size: cover;
     }
 

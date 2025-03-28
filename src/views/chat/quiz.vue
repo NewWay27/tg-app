@@ -120,11 +120,13 @@ export default {
         },
         scrollToElement() {
             this.$nextTick(() => {
-                document.querySelector('.chat').scrollTo({
-                    top: document.querySelector('.chat').scrollHeight,
-                    behavior: 'smooth'
-                })
-
+                const chat = document.querySelector('.chat');
+                if (chat) {
+                    chat.scrollTo({
+                        top: chat.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
             });
         },
     },
@@ -190,7 +192,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -266,7 +268,7 @@ export default {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow-y: auto;
+    // overflow-y: auto;
 
 
     &::-webkit-scrollbar {
@@ -279,14 +281,14 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 }
 
 .chat {
     padding: 80px 7px 50px;
     margin: 0 0 10px 0;
-    height: 80vh;
+    height: 70dvh;
     overflow: auto;
     // margin: 0 0 20px 0;
 

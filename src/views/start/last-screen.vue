@@ -48,7 +48,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -129,7 +129,7 @@ export default {
         height: 90vh;
 
         @media (max-width: 480px) {
-            height: 100vh;
+            height: 100dvh;
         }
     }
 

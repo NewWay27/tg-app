@@ -10,7 +10,7 @@
 <style lang="scss">
 .loader {
     background: #0a3956;
-    height: 100vh;
+    height: 100dvh;
     width: 539px;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
     }
 
     @media (max-width: 480px) {
-        height: 100vh;
+        height: 100dvh;
         width: 100%;
         border-radius: 0;
     }

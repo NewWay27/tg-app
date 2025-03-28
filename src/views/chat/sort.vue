@@ -221,10 +221,13 @@ export default {
     methods: {
         scrollToElement(refName) {
             this.$nextTick(() => {
-                document.querySelector('.chat').scrollTo({
-                    top: document.querySelector('.chat').scrollHeight,
-                    behavior: 'smooth'
-                })
+                const chat = document.querySelector('.chat');
+                if (chat) {
+                    chat.scrollTo({
+                        top: chat.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
             });
         },
         handleNoteAnimationEnd() {
@@ -309,7 +312,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -398,7 +401,7 @@ export default {
 .chat {
     padding: 80px 7px 50px;
     margin: 0 0 20px 0;
-    height: 80vh;
+    height: 70vh;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -696,7 +699,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;

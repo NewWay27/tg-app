@@ -235,11 +235,13 @@ export default {
         },
         scrollToElement(refName) {
             this.$nextTick(() => {
-                document.querySelector('.chat').scrollTo({
-                    top: document.querySelector('.chat').scrollHeight,
-                    behavior: 'smooth'
-                })
-
+                const chat = document.querySelector('.chat');
+                if (chat) {
+                    chat.scrollTo({
+                        top: chat.scrollHeight + 100,
+                        behavior: 'smooth'
+                    });
+                }
             });
         },
         handleNoteAnimationEnd() {
@@ -449,7 +451,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 100vh;
+    height: 100dvh;
 
     @media (max-width: 480px) {
         background: none;
@@ -521,12 +523,12 @@ export default {
 
 .page {
     background-color: #02283E;
-    // height: 100vh;
+    // height: 100dvh;
     background-image: url(@/assets/Vector.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow-y: auto;
+    // overflow-y: auto;
 
 
     &::-webkit-scrollbar {
@@ -546,7 +548,7 @@ export default {
 .chat {
     padding: 80px 7px 50px;
     margin: 0 0 20px 0;
-    height: 80vh;
+    height: 70vh;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -888,7 +890,7 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -901,7 +903,7 @@ export default {
     bottom: 0;
     right: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
