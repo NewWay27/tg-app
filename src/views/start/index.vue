@@ -260,7 +260,7 @@ export default {
         saveUtmToLocalStorage() {
             const params = new URLSearchParams(window.location.search);
 
-            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+            ['utm_source', 'utm_medium', 'utm_campaign'].forEach(key => {
                 const value = params.get(key);
                 if (value) {
                     localStorage.setItem(key, value);

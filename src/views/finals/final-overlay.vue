@@ -58,7 +58,7 @@
                         </div>
                         <div @click="openLeaderboard">
                             <img src="@/assets/coin.svg" alt="coin">
-                            <span>Открыть таблицу лидеров</span>
+                            <span>Мои баллы</span>
                         </div>
                         <div @click="openTelegram">
                             <img src="@/assets/tg.svg" alt="tg">

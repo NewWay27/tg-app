@@ -362,13 +362,13 @@ export default {
     }
 
     @media (max-width: 800px) {
-        height: 100vh;
+        height: 100dvh;
     }
 }
 
 .chat {
     padding: 90px 7px 0;
-    height: 82vh;
+    height: 85dvh;
     overflow: auto;
 
     &::-webkit-scrollbar {
