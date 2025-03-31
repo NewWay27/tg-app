@@ -1,7 +1,7 @@
 <template>
     <div class="desktop-background">
         <img src="@/assets/logo_desktop.png" alt="logo" class="logo-desktop">
-        <div class="tg-desktop">
+        <div class="tg-desktop" @click="openTelegram">
             <span>Телеграм-канал</span>
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
@@ -152,6 +152,9 @@ export default {
                 .catch(error => {
                     console.error(error);
                 })
+        },
+        openTelegram() {
+            window.open('https://t.me/s/ozon_tech', '_blank', 'noopener,noreferrer');
         },
         preloadImages(imagePaths) {
             return Promise.all(imagePaths.map(src => {

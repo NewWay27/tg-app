@@ -1,7 +1,7 @@
 <template>
     <div class="desktop-background">
         <img src="@/assets/logo_desktop.png" alt="logo" class="logo-desktop">
-        <div class="tg-desktop">
+        <div class="tg-desktop" @click="openTelegram">
             <span>Телеграм-канал</span>
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
@@ -221,6 +221,9 @@ export default {
         }, 5000);
     },
     methods: {
+        openTelegram() {
+            window.open('https://t.me/s/ozon_tech', '_blank', 'noopener,noreferrer');
+        },
         setCookie(name, value, days) {
             const date = new Date();
             date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);

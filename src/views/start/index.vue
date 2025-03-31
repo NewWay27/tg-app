@@ -2,7 +2,7 @@
 
     <div class="desktop-background">
         <img src="@/assets/logo_desktop.png" alt="logo" class="logo-desktop">
-        <div class="tg-desktop">
+        <div class="tg-desktop" @click="openTelegram">
             <span>Телеграм-канал</span>
             <img src="@/assets/tg-d.svg" alt="tg">
         </div>
@@ -120,6 +120,9 @@ export default {
             setTimeout(() => {
                 el.style.boxShadow = '';
             }, 100);
+        },
+        openTelegram() {
+            window.open('https://t.me/s/ozon_tech', '_blank', 'noopener,noreferrer');
         },
         moveGoose() {
             let goose = this.$refs.secondGoose;
