@@ -128,70 +128,18 @@ export default {
             }
         },
 
-        async openVacancies() {
-            // window.location.href = 'https://ozon.tech/gamebot-job';
+        openVacancies() {
+            const url = new URL("https://ozon.tech/gamebot-job");
 
-            try {
-                // Получаем CSRF-токен и UUID из cookies
-                await this.fetchCsrfToken(); // Дожидаемся завершения получения CSRF-токена
-                const csrfToken = this.getCookie('XSRF-TOKEN');
-                const user_id = this.getCookie('user_id');
-                const sessionId = this.getCookie('X-Session-ID');
-                const utm_source = localStorage.getItem('utm_source')
-                const utm_medium = localStorage.getItem('utm_medium')
-                const utm_campaign = localStorage.getItem('utm_campaign')
-                // Проверяем наличие CSRF-токена и UUID
-                if (!csrfToken) {
-                    console.error('CSRF-токен не найден в куках.');
-                    return;
-                }
-                if (!user_id) {
-                    console.error('user_id не найден в куках.');
-                    return;
-                }
+            const utm_source = localStorage.getItem("utm_source");
+            const utm_medium = localStorage.getItem("utm_medium");
+            const utm_campaign = localStorage.getItem("utm_campaign");
 
-                // Формируем URL для запроса
-                const url = new URL(`https://ozon.tech/gamebot-job`);
-                // url.searchParams.append('utm_source', 'tg');
-                // url.searchParams.append('utm_medium', 'gamebot');
-                // url.searchParams.append('utm_campaign', user_id);
-                url.searchParams.append('utm_source', utm_source);
-                url.searchParams.append('utm_medium', utm_medium);
-                url.searchParams.append('utm_campaign', utm_campaign);
+            if (utm_source) url.searchParams.append("utm_source", utm_source);
+            if (utm_medium) url.searchParams.append("utm_medium", utm_medium);
+            if (utm_campaign) url.searchParams.append("utm_campaign", utm_campaign);
 
-                // Устанавливаем заголовки
-                const headers = {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    'X-Session-ID': sessionId,
-                    "X-XSRF-TOKEN": csrfToken,
-                    "Sec-Fetch-Dest": "empty",
-                    "Sec-Fetch-Mode": "cors",
-                    "Sec-Fetch-Site": "same-origin", // Используется, если фронтенд и API на одном домене
-                };
-
-                // Выполняем POST-запрос
-                const response = await fetch(url.toString(), {
-                    method: "POST",
-                    headers,
-                    credentials: "include", // Включаем cookies в запрос
-                });
-
-                // Проверяем статус ответа
-                if (!response.ok) {
-                    throw new Error(`Ошибка запроса: ${response.status} ${response.statusText}`);
-                }
-
-                // Обрабатываем успешный ответ
-                const data = await response.json();
-                console.log('Данные успешно отправлены:', data);
-
-                // Переход на другую страницу
-                window.location.href = url;
-            } catch (error) {
-                // Логируем ошибку
-                console.error('Ошибка при отправке данных:', error);
-            }
+            window.open(url.toString(), "_blank");
         },
         openMenu() {
             this.showMenu = true;
